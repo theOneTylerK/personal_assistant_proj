@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<h1>Talk To Alfred</h1>
+@{
+    ViewData["Title"] = "Alfred";
+}
+
+@*<h1>Maintenance</h1>
+
+<form id="chat-form" class="simple-form" ;>
+    <div class="jumbotron" ; style="opacity:0.8;">
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <img src=https://storybird.s3.amazonaws.com/artwork/andymcnally/full/happy-bot.jpeg ; height="100" ; style="position:center" />
+            </div>
+            <div class="col-sm-4"></div>
+            <br />
+            <br />
+        </div>
+        <div class="row">
+            <h4>Hi! I am Chad! I am here to help you solve basic Maintenance issues. If at any time you believe that I cannot assist, you can ask me to submit a maintenance request and I will notify a Maintenance Tech. You can track your maintenance status by either asking me or using the Navigation bar.</h4>
+        </div>
+    </div>*@
+@*</form>*@
+<form>
+    <div class="jumbotron" ; style="opacity: 0.8;">
+        <div class="row">
+            <h8>You said:</h8>
+            <div class="col-sm-4" , id="userResponse"></div>
+            <h8>Chad says:</h8>
+            <div class="col-sm-4" , id="alfredResponse"></div>
+            <div class="col-sm-4"></div>
+        </div>
+    </div>
+</form>
+
+<br />
+<br />
+<div>
+    <form id="my-form" class="simple-form">
+        <input type="text" name="userMessage" placeholder="Talk to Alfred here" />
+        <button type="button" id="button1" onclick="alfredTalk()">Send Message</button>
+    </form>
+</div>
+<script src="~/js/Alfred.js"></script>
+
