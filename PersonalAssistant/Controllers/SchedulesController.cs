@@ -42,7 +42,15 @@ namespace PersonalAssistant.Controllers
             {
                 return HttpNotFound();
             }
-            return View(schedule);
+            else
+            {
+                //List<Plan> plansInSchedule = new List<Plan>();
+                //var startDate = schedule.StartDate;
+                //var endDate = schedule.EndDate;
+                //var plans = db.Plans.Where(p => p.StartDate  startDate);
+                return View(schedule);
+            }
+           
         }
 
         // GET: Schedules/Create
