@@ -8,12 +8,25 @@ namespace PersonalAssistant.Migrations
         public override void Up()
         {
             CreateTable(
+                "dbo.Contacts",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        FirstName = c.String(),
+                        LastName = c.String(),
+                        EmailAddress = c.String(),
+                        PhoneNumber = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.Plans",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
                         DayOfPlan = c.String(),
+                        MonthOfPlan = c.String(),
                         StartDate = c.DateTime(nullable: false),
                         EndDate = c.DateTime(nullable: false),
                         StartTime = c.String(),
@@ -30,6 +43,7 @@ namespace PersonalAssistant.Migrations
                 c => new
                     {
                         ScheduleId = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
                         StartDate = c.String(),
                         EndDate = c.String(),
                     })
@@ -126,6 +140,7 @@ namespace PersonalAssistant.Migrations
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Schedules");
             DropTable("dbo.Plans");
+            DropTable("dbo.Contacts");
         }
     }
 }

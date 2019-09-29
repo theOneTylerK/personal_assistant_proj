@@ -15,16 +15,16 @@ namespace PersonalAssistant.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Schedules
-        public ActionResult Index(int id)
+        public ActionResult Index(string Name)
         {
             List<Schedule> filterListOfSchedules = new List<Schedule>();
-            if(id == null)
+            if(Name == null)
             {
                 return View(db.Schedules.ToList());
             }
             else
             {
-                filterListOfSchedules = db.Schedules.Where(s => s.ScheduleId == id).ToList();
+                filterListOfSchedules = db.Schedules.Where(s => s.Name == Name).ToList();
                 return View(filterListOfSchedules);
             }
 
@@ -44,11 +44,33 @@ namespace PersonalAssistant.Controllers
             }
             else
             {
-                //List<Plan> plansInSchedule = new List<Plan>();
-                //var startDate = schedule.StartDate;
-                //var endDate = schedule.EndDate;
-                //var plans = db.Plans.Where(p => p.StartDate  startDate);
-                return View(schedule);
+                var startDate = DateTime.Parse(schedule.StartDate).Date;
+                var endDate = DateTime.Parse(schedule.EndDate).Date;
+                var plans = db.Plans.Where(p => p.StartDate >= startDate && p.EndDate <= endDate).ToList();
+                plans.Sort();
+                return View(plans);
+            }
+           
+        }
+
+         public ActionResult ListPlans(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Schedule schedule = db.Schedules.Find(id);
+            if (schedule == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                var startDate = DateTime.Parse(schedule.StartDate).Date;
+                var endDate = DateTime.Parse(schedule.EndDate).Date;
+                var plans = db.Plans.Where(p => p.StartDate >= startDate && p.EndDate <= endDate).ToList();
+                plans.Sort();
+                return View(plans);
             }
            
         }
@@ -64,7 +86,7 @@ namespace PersonalAssistant.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,StartDate,EndDate")] Schedule schedule)
+        public ActionResult Create([Bind(Include = "ScheduleId,Name,StartDate,EndDate")] Schedule schedule)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +118,7 @@ namespace PersonalAssistant.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,StartDate,EndDate")] Schedule schedule)
+        public ActionResult Edit([Bind(Include = "ScheduleId,Name,StartDate,EndDate")] Schedule schedule)
         {
             if (ModelState.IsValid)
             {

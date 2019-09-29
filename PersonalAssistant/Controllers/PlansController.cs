@@ -54,6 +54,28 @@ namespace PersonalAssistant.Controllers
             }
             return View(plan);
         }
+        public ActionResult ListPlans(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var thisPlan = db.Plans.Where(p => p.Id == id).FirstOrDefault();
+            Schedule schedule = db.Schedules.Where(s=>s.Name == thisPlan.MonthOfPlan).FirstOrDefault();
+            if (schedule == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                var startDate = DateTime.Parse(schedule.StartDate).Date;
+                var endDate = DateTime.Parse(schedule.EndDate).Date;
+                var plans = db.Plans.Where(p => p.StartDate >= startDate && p.EndDate <= endDate).ToList();
+                plans.Sort();
+                return View(plans);
+            }
+
+        }
 
         // GET: Plans/Create
         public ActionResult Create()

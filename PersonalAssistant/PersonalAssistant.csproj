@@ -210,6 +210,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ContactsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PlansController.cs" />
@@ -217,16 +218,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201909261622196_InitialMigration.cs" />
-    <Compile Include="Migrations\201909261622196_InitialMigration.Designer.cs">
-      <DependentUpon>201909261622196_InitialMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201909261632596_NewMigration.cs" />
-    <Compile Include="Migrations\201909261632596_NewMigration.Designer.cs">
-      <DependentUpon>201909261632596_NewMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201909292114034_InitialMigration.cs" />
+    <Compile Include="Migrations\201909292114034_InitialMigration.Designer.cs">
+      <DependentUpon>201909292114034_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Plan.cs" />
@@ -302,8 +300,15 @@
     <Content Include="Views\Plans\Details.cshtml" />
     <Content Include="Views\Plans\Edit.cshtml" />
     <Content Include="Views\Plans\Index.cshtml" />
+    <Content Include="Views\Schedules\ListPlans.cshtml" />
+    <Content Include="Views\Contacts\Create.cshtml" />
+    <Content Include="Views\Contacts\Delete.cshtml" />
+    <Content Include="Views\Contacts\Details.cshtml" />
+    <Content Include="Views\Contacts\Edit.cshtml" />
+    <Content Include="Views\Contacts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Views\Calendar\" />
   </ItemGroup>
   <ItemGroup>
@@ -320,11 +325,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201909261622196_InitialMigration.resx">
-      <DependentUpon>201909261622196_InitialMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201909261632596_NewMigration.resx">
-      <DependentUpon>201909261632596_NewMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201909292114034_InitialMigration.resx">
+      <DependentUpon>201909292114034_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -14,6 +14,7 @@ namespace PersonalAssistant.Models
         public string Name { get; set; }
         [Display(Name = "Day of Plan")]
         public string DayOfPlan { get; set; }
+        public string MonthOfPlan { get; set; }
         [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
 
@@ -22,6 +23,10 @@ namespace PersonalAssistant.Models
         public string StartTime { get; set; }
         public string EndTime { get; set; }
         public string Description { get; set; }
+
+        [ForeignKey("Schedule")]
+        public int ScheduleId { get; set; }
+        public Schedule Schedule { get; set; }
 
     }
 }

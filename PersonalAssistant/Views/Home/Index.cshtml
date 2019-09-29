@@ -7,11 +7,14 @@
 @{
     ViewData["Title"] = "Alfred";
 }
+@*@Scripts.Render("~/bundles/jquery");*@
 
 <form>
     <div class="jumbotron" ; style="opacity: 0.8;">
         <div class="row">
-            <div class="col-sm-4" , id="userResponse"></div>
+            <div class="col-sm-4">
+                <textarea id="userResponse" rows="5"></textarea>
+            </div>
             <div class="col-sm-4" , id="alfredResponse"></div>
             <div class="col-sm-4"></div>
         </div>
@@ -20,6 +23,11 @@
 
 <br />
 <br />
+    <script>
+        $("#userResponse").on("change", function () {
+            alert("notice change");
+        });
+    </script>
 <div>
     <form id="my-form" class="simple-form">
         <input type="text" name="userMessage" placeholder="Talk to Alfred here" />
@@ -47,11 +55,11 @@
             }
         }
 
-        document.getElementById('userResponse').innerHTML = finalTranscript + '<i style="color:#ddd;">' + interimTranscript + '</>';
+        document.getElementById('userResponse').innerHTML = finalTranscript + interimTranscript;
     }
     function startListening() {
         recognition.start();
     }
-    
+
 </script>
 

@@ -33,5 +33,6 @@ namespace PersonalAssistant.Models
         public System.Data.Entity.DbSet<PersonalAssistant.Models.Schedule> Schedules { get; set; }
         public System.Data.Entity.DbSet<PersonalAssistant.Models.Plan> Plans { get; set; }
 
+        public System.Data.Entity.DbSet<PersonalAssistant.Models.Contact> Contacts { get; set; }
     }
 }
