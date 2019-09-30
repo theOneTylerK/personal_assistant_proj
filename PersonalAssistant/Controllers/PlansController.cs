@@ -61,7 +61,7 @@ namespace PersonalAssistant.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var thisPlan = db.Plans.Where(p => p.Id == id).FirstOrDefault();
-            Schedule schedule = db.Schedules.Where(s=>s.Name == thisPlan.MonthOfPlan).FirstOrDefault();
+            Schedule schedule = db.Schedules.Where(s=>s.ScheduleId == thisPlan.ScheduleId).FirstOrDefault();
             if (schedule == null)
             {
                 return HttpNotFound();

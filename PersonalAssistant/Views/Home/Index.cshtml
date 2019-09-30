@@ -7,35 +7,31 @@
 @{
     ViewData["Title"] = "Alfred";
 }
-@*@Scripts.Render("~/bundles/jquery");*@
 
 <form>
     <div class="jumbotron" ; style="opacity: 0.8;">
         <div class="row">
             <div class="col-sm-4">
-                <textarea id="userResponse" rows="5"></textarea>
+                <textarea class="target" id="userResponse" rows="5"></textarea>
             </div>
             <div class="col-sm-4" , id="alfredResponse"></div>
             <div class="col-sm-4"></div>
+
         </div>
     </div>
 </form>
 
 <br />
 <br />
-    <script>
-        $("#userResponse").on("change", function () {
-            alert("notice change");
-        });
-    </script>
+
 <div>
     <form id="my-form" class="simple-form">
-        <input type="text" name="userMessage" placeholder="Talk to Alfred here" />
+        <input type="text" id="input" name="userMessage" placeholder="Talk to Alfred here" />
         <button type="button" id="button1" onclick="alfredTalk()">Send Message</button>
-        <button type="button" id="button1" onclick="startListening()">Use Speech Recognition</button>
+        <button type="button" id="button2" onclick="startListening()">Use Speech Recognition</button>
     </form>
 </div>
-<script src="~/js/NewAlfred.js"></script>
+
 
 <script>
     window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
@@ -54,12 +50,25 @@
                 interimTranscript += transcript;
             }
         }
-
         document.getElementById('userResponse').innerHTML = finalTranscript + interimTranscript;
+        PrintEventShown(finalTranscript);
+        finalTranscript = '';
     }
     function startListening() {
         recognition.start();
     }
 
+    function PrintEventShown(textPass) {
+        // put a sleeper
+        // pass the value of the textare into the input after the sleepers sleetps for 20 sec
+        $("#input").val(textPass);
+        $("#userResponse").val(textPass);
+        $("#button1").click();
+        $("#input").empty();
+        $("#userResponse").empty();
+    }
+
 </script>
+<script src="~/js/NewAlfred.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
