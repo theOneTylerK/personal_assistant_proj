@@ -16,7 +16,6 @@
             </div>
             <div class="col-sm-4" , id="alfredResponse"></div>
             <div class="col-sm-4"></div>
-
         </div>
     </div>
 </form>
@@ -31,6 +30,19 @@
         <button type="button" id="button2" onclick="startListening()">Use Speech Recognition</button>
     </form>
 </div>
+
+<table id="my-table" border="1px solid black">
+    <tr>
+        <th>Name</th>
+        <th>Day of Plan</th>
+        <th>Month of Plan</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Description</th>
+    </tr>
+</table>
 
 
 <script>
@@ -59,8 +71,6 @@
     }
 
     function PrintEventShown(textPass) {
-        // put a sleeper
-        // pass the value of the textare into the input after the sleepers sleetps for 20 sec
         $("#input").val(textPass);
         $("#userResponse").val(textPass);
         $("#button1").click();
@@ -69,6 +79,6 @@
     }
 
 </script>
-<script src="~/js/NewAlfred.js"></script>
+<script src="~/js/Alfred.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 

@@ -24,9 +24,5 @@ namespace PersonalAssistant.Models
         public string EndTime { get; set; }
         public string Description { get; set; }
 
-        [ForeignKey("Schedule")]
-        public int ScheduleId { get; set; }
-        public Schedule Schedule { get; set; }
-
     }
 }

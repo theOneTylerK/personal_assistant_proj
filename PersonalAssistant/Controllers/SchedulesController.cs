@@ -48,7 +48,7 @@ namespace PersonalAssistant.Controllers
                 var endDate = DateTime.Parse(schedule.EndDate).Date;
                 var plans = db.Plans.Where(p => p.StartDate >= startDate && p.EndDate <= endDate).ToList();
                 plans.Sort();
-                return View(plans);
+                return View("Index", "Plans");
             }
            
         }

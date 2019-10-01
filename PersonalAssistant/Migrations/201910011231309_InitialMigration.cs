@@ -32,22 +32,8 @@ namespace PersonalAssistant.Migrations
                         StartTime = c.String(),
                         EndTime = c.String(),
                         Description = c.String(),
-                        ScheduleId = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Schedules", t => t.ScheduleId, cascadeDelete: true)
-                .Index(t => t.ScheduleId);
-            
-            CreateTable(
-                "dbo.Schedules",
-                c => new
-                    {
-                        ScheduleId = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        StartDate = c.String(),
-                        EndDate = c.String(),
-                    })
-                .PrimaryKey(t => t.ScheduleId);
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -71,6 +57,17 @@ namespace PersonalAssistant.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId)
                 .Index(t => t.RoleId);
+            
+            CreateTable(
+                "dbo.Schedules",
+                c => new
+                    {
+                        ScheduleId = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        StartDate = c.String(),
+                        EndDate = c.String(),
+                    })
+                .PrimaryKey(t => t.ScheduleId);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -125,20 +122,18 @@ namespace PersonalAssistant.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Plans", "ScheduleId", "dbo.Schedules");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.Plans", new[] { "ScheduleId" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
+            DropTable("dbo.Schedules");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
-            DropTable("dbo.Schedules");
             DropTable("dbo.Plans");
             DropTable("dbo.Contacts");
         }

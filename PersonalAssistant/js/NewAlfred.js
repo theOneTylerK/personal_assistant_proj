@@ -1,5 +1,5 @@
 ﻿
-//const messageRecognition = new window.SpeechRecognition();
+
 var min = 0;
 var max = 4;
 
@@ -35,14 +35,19 @@ function alfredTalk(userInput)
         document.getElementById("alfredResponse").innerHTML = "No problem. Just a moment while I get a pen.";
         saySomething("No problem. Just a moment while I get a pen.")
     }
+    else if((userInput.includes("show") || userInput.includes("see")) && (userInput.includes("schedule") || userInput.includes("calendar")))
+    {
+        document.getElementById("alfredResponse").innerHTML = "Of course! Here you go.";
+        saySomething("Of course! Here you go.");
+        makeTable();
+    }
+
  
 }
 
     function saySomething(alfredResponse) {
         var message = new SpeechSynthesisUtterance();
         var voices = window.speechSynthesis.getVoices();
-        //message.default = false;
-        //message.voice = voices[5];
         message.voiceURI = "native";
         message.volume = 1;
         message.rate = 1;
@@ -52,37 +57,61 @@ function alfredTalk(userInput)
         speechSynthesis.speak(message);
     }
 
-    //function hearSomething(userResponse) {
-    //    messageRecognition.onresult = (event) => {
-    //        var speechToText = event.results[0][0].transcript;
-    //    }
-    //    messageRecognition.start();
-    //    messageRecognition.continuous = true;
 
-    //}
+    (function ($) {
+       function AddPlan(e) {
+           var obj = {
+               Name : this["Name"].value,
+               DayOfPlan: this["DayOfPlan"].value,
+               MonthOfPlan: this["MonthOfPlan"].value
+               StartDate: this["StartDate"].value
+               EndDate: this["EndDate"].value
+               StartTime: this["StartTime"].value
+               EndTime: this["EndTime"].value
+               Description: this["Description"].value
 
+           };
 
+          $.ajax({
+                url: 'https://localhost:44318/Plans/Index',
+                dataType: 'json',
+               type: 'get',
+                contentType: 'application/json',
+               data: JSON.stringify(obj),
+                success: function (data) {
+                    $("#my-table tr").remove()
+                    makeTable();
+               },
+                error: function (errorThrown) {
+                    console.log(errorThrown);
+                }
+            }); 
+       }
 
-    //(function ($) {
-    //    function processForm(e) {
-    //        var dict = {
-    //            Title: this["title"].value,
-    //            Director: this["director"].value,
-    //            Genre: this["genre"].value
-    //        };
+function makeTable(){
 
-    //        $.ajax({
-    //            url: '',
-    //            dataType: 'json',
-    //            type: 'post',
-    //            contentType: 'application/json',
-    //            data: JSON.stringify(dict),
-    //            success: function (data) {
-    //                $("#my-table tr").remove()
-    //                makeTable();
-    //            },
-    //            error: function (errorThrown) {
-    //                console.log(errorThrown);
-    //            }
-    //        });
-    //    }
+        $.ajax({
+            url: 'https://localhost:44352/Plans/Index',
+            dataType: 'json',
+            type: 'get',
+            contentType: 'application/json',
+            success: function( data ){
+                for(let el in data)
+                {
+                    $("#my-table").append(
+                        <td>${data[el].Name}</td>
+                        <td> ${data[el].DayOfPlan}</td>
+                        <td> ${data[el].MonthOfPlan}</td>
+                        <td> ${data[el].StartDate}</td>
+                        <td> ${data[el].EndDate}</td>
+                        <td> ${data[el].StartTime}</td>
+                        <td> ${data[el].EndTime}</td>
+                        <td> ${data[el].Description}</td>)
+                }
+
+            },
+            error: function( errorThrown ){
+                console.log( errorThrown );
+            }
+        });
+    }

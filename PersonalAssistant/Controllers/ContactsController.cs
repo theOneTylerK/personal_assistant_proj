@@ -17,7 +17,9 @@ namespace PersonalAssistant.Controllers
         // GET: Contacts
         public ActionResult Index()
         {
-            return View(db.Contacts.ToList());
+            List<Contact> contactsList = new List<Contact>();
+            contactsList = db.Contacts.ToList();
+            return View(contactsList);
         }
 
         // GET: Contacts/Details/5

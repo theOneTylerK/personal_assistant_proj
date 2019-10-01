@@ -13,7 +13,7 @@ namespace PersonalAssistant.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201909292114034_InitialMigration"; }
+            get { return "201910011231309_InitialMigration"; }
         }
         
         string IMigrationMetadata.Source
