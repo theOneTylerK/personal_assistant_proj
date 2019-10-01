@@ -44,7 +44,49 @@ namespace PersonalAssistant.Controllers
         {
             List<Plan> ListOfPlans = new List<Plan>();
             ListOfPlans = db.Plans.ToList();
+            foreach(Plan plan in ListOfPlans)
+            {
+                plan.StartDate.Date.ToString();
+                plan.EndDate.Date.ToString();
+            }
             return Json (ListOfPlans, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetPlansForOctober()
+        {
+            List<Plan> ListOfPlans = new List<Plan>();
+            ListOfPlans = db.Plans.Where(p=>p.MonthOfPlan == "October").ToList();
+            foreach (Plan plan in ListOfPlans)
+            {
+                plan.StartDate.Date.ToString();
+                plan.EndDate.Date.ToString();
+            }
+            return Json(ListOfPlans, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public JsonResult GetPlansForNovember()
+        {
+            List<Plan> ListOfPlans = new List<Plan>();
+            ListOfPlans = db.Plans.Where(p => p.MonthOfPlan == "November").ToList();
+            foreach (Plan plan in ListOfPlans)
+            {
+                plan.StartDate.Date.ToString();
+                plan.EndDate.Date.ToString();
+            }
+            return Json(ListOfPlans, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public JsonResult GetPlansForDecember()
+        {
+            List<Plan> ListOfPlans = new List<Plan>();
+            ListOfPlans = db.Plans.Where(p => p.MonthOfPlan == "December").ToList();
+            foreach (Plan plan in ListOfPlans)
+            {
+                plan.StartDate.Date.ToString();
+                plan.EndDate.Date.ToString();
+            }
+            return Json(ListOfPlans, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Plans/Details/5

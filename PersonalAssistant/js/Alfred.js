@@ -15,6 +15,7 @@ function alfredTalk(userInput) {
 
         var userInput = document.getElementsByName("userMessage")[0].value;
         document.getElementById("userResponse").innerHTML = userInput;
+        userInput.toLowerCase();
     }
     if (userInput.includes("hello") || userInput.includes("hi") || userInput.includes("greetings")) {
         var AlfredGreetingsDictionary =
@@ -34,10 +35,20 @@ function alfredTalk(userInput) {
         document.getElementById("alfredResponse").innerHTML = "No problem. Just a moment while I get a pen.";
         saySomething("No problem. Just a moment while I get a pen.")
     }
-    else if ((userInput.includes("show") || userInput.includes("see")) && (userInput.includes("schedule") || userInput.includes("calendar"))) {
+    else if ((userInput.includes("show") || userInput.includes("see")) && (userInput.includes("schedule") || userInput.includes("calendar")) && (!userInput.includes("october") && !userInput.includes("november"))) {
         document.getElementById("alfredResponse").innerHTML = "Of course! Here you go.";
         saySomething("Of course! Here you go.");
         showPlans();
+    }
+    else if ((userInput.includes("show") || userInput.includes("see")) && (userInput.includes("schedule") || userInput.includes("calendar")) && userInput.includes("october")) {
+        document.getElementById("alfredResponse").innerHTML = "No problem. Here are your plans for the month of October.";
+        saySomething("No problem. Here are your plans for the month of October.");
+        showOctoberPlans();
+    }
+    else if ((userInput.includes("show") || userInput.includes("see")) && (userInput.includes("schedule") || userInput.includes("calendar")) && userInput.includes("november")) {
+        document.getElementById("alfredResponse").innerHTML = "No problem. Here are your plans for the month of November.";
+        saySomething("No problem. Here are your plans for the month of November.");
+        showNovemberPlans();
     }
 
 
@@ -118,5 +129,73 @@ function showPlans() {
                 console.log(errorThrown);
             }
         });
-    }
+}
+
+function showOctoberPlans() {
+
+    //    $.get("/Plans/Index", null, function (data) {
+    //        console.log(data);
+    //    });
+    //};
+
+    $.ajax({
+        url: 'https://localhost:44318/Plans/GetPlansForOctober',
+        //dataType: 'json',
+        type: 'get',
+        //contentType: 'application/json',
+        success: function (data) {
+            console.log(data);
+            for (let el in data) {
+                $("#my-table").append(
+                    `<tr>
+                        <td>${data[el].Name}</td>
+                        <td> ${data[el].DayOfPlan}</td>
+                        <td> ${data[el].MonthOfPlan}</td>
+                        <td> ${data[el].StartDate}</td>
+                        <td> ${data[el].EndDate}</td>
+                        <td> ${data[el].StartTime}</td>
+                        <td> ${data[el].EndTime}</td>
+                        <td> ${data[el].Description}</td>
+                        </tr>`)
+            }
+        },
+        error: function (errorThrown) {
+            console.log(errorThrown);
+        }
+    });
+}
+
+function showNovemberPlans() {
+
+    //    $.get("/Plans/Index", null, function (data) {
+    //        console.log(data);
+    //    });
+    //};
+
+    $.ajax({
+        url: 'https://localhost:44318/Plans/GetPlansForNovember',
+        //dataType: 'json',
+        type: 'get',
+        //contentType: 'application/json',
+        success: function (data) {
+            console.log(data);
+            for (let el in data) {
+                $("#my-table").append(
+                    `<tr>
+                        <td>${data[el].Name}</td>
+                        <td> ${data[el].DayOfPlan}</td>
+                        <td> ${data[el].MonthOfPlan}</td>
+                        <td> ${data[el].StartDate}</td>
+                        <td> ${data[el].EndDate}</td>
+                        <td> ${data[el].StartTime}</td>
+                        <td> ${data[el].EndTime}</td>
+                        <td> ${data[el].Description}</td>
+                        </tr>`)
+            }
+        },
+        error: function (errorThrown) {
+            console.log(errorThrown);
+        }
+    });
+}
 //})(jQuery);
