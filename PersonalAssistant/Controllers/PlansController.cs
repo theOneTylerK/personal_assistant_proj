@@ -69,6 +69,25 @@ namespace PersonalAssistant.Controllers
             ListOfPlans = db.Plans.Where(p => p.MonthOfPlan == "December").ToList();
             return Json(ListOfPlans, JsonRequestBehavior.AllowGet);
         }
+        [HttpGet]
+        public JsonResult GetPlansForToday()
+        {
+            List<Plan> ListOfPlans = new List<Plan>();
+            var today = DateTime.Now.Date;
+            var todayString = today.ToString();
+            if(todayString.Count() == 21)
+            {
+                var noTimeToday = todayString.Substring(0, 9);
+                ListOfPlans = db.Plans.Where(p => p.StartDate == noTimeToday).ToList();
+            }
+            else
+            {
+                var noTimeToday = todayString.Substring(0, 10);
+                ListOfPlans = db.Plans.Where(p => p.StartDate == noTimeToday).ToList();
+            }
+          
+            return Json(ListOfPlans, JsonRequestBehavior.AllowGet);
+        }
         [HttpPost]
         public void CreateNewPlan(Plan plan)
         {

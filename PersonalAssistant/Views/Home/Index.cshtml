@@ -39,12 +39,10 @@
             <table id="my-table" border="1px solid black" width="100%">
                 <tr>
                     <th>Name</th>
-                    @*<th>Day of Plan</th>
-                <th>Month of Plan</th>*@
+                    <th>Day of Plan</th>
+                    <th>Month of Plan</th>
                     <th>Start Date</th>
-                    <th>End Date</th>
                     <th>Start Time</th>
-                    <th>End Time</th>
                     <th>Description</th>
                 </tr>
             </table>
@@ -52,10 +50,6 @@
         <div class="col-sm-2"></div>
     </div>
 </form>
-
-<script>
-
-</script>
 
 <script>
     document.onkeydown = function (e) {
@@ -70,9 +64,6 @@
     recognition.interimResults = true;
     recognition.maxAlternatives = 10;
     recognition.continuous = false;
-    recognition.onspeechstart = function () {
-        recognition.start();
-    }
     recognition.onresult = (event) => {
         let interimTranscript = '';
         for (let i = event.resultIndex, len = event.results.length; i < len; i++) {

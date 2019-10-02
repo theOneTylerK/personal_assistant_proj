@@ -1,5 +1,6 @@
 ﻿
 var currentYear = "2019";
+var rows = document.getElementById("my-table").getElementsByTagName("tr").length;
 var min = 0;
 var max = 4;
 
@@ -49,7 +50,7 @@ function alfredTalk(userInput) {
         saySomething("Of course! Here you go.");
         showPlans();
     }
-    else if ((userInput.includes("show") || userInput.includes("see")) && (userInput.includes("schedule") || userInput.includes("calendar")) && userInput.includes("october")) {
+    else if ((userInput.includes("show") || userInput.includes("see")) && (userInput.includes("schedule") || userInput.includes("calendar")) && (userInput.includes("october") || userInput.includes("October"))) {
         document.getElementById("alfredResponse").innerHTML = "No problem. Here are your plans for the month of October.";
         saySomething("No problem. Here are your plans for the month of October.");
         showOctoberPlans();
@@ -58,6 +59,11 @@ function alfredTalk(userInput) {
         document.getElementById("alfredResponse").innerHTML = "No problem. Here are your plans for the month of November.";
         saySomething("No problem. Here are your plans for the month of November.");
         showNovemberPlans();
+    }
+    else if ((userInput.includes("show") || userInput.includes("see")) && (userInput.includes("schedule") || userInput.includes("event") || userInput.includes("to do")) && (userInput.includes("today"))) {
+        document.getElementById("alfredResponse").innerHTML = "Sure. Just a moment.";
+        saySomething("Sure. Just a moment.");
+        showTodayPlans();
     }
 
 
@@ -115,6 +121,7 @@ function showPlans() {
             //contentType: 'application/json',
             success: function (data) {
                 console.log(data);
+                saySomething("Here is what you have going on today.")
                 for (let el in data) {
                     $("#my-table").append(
                         `<tr>
@@ -136,6 +143,45 @@ function showPlans() {
         });
 }
 
+function showTodayPlans() {
+    
+        $.ajax({
+            url: 'https://localhost:44318/Plans/GetPlansForToday',
+            //dataType: 'json',
+            type: 'get',
+            //contentType: 'application/json',
+            success: function (data) {
+                for (i = 1; i < rows; i++) {
+                    document.getElementById("my-table").deleteRow(i);
+                    i++;
+                }
+                console.log(data);
+                if (data[0] == null) {
+                    saySomething("Looks like your day is wide open.")
+                }
+                else {
+                    saySomething("Here is what you have on tap today.")
+                for (let el in data) {
+                    $("#my-table").append(
+                        `<tr>
+                        <td>${data[el].Name}</td>
+                        <td> ${data[el].DayOfPlan}</td>
+                        <td> ${data[el].MonthOfPlan}</td>
+                        <td> ${data[el].StartDate}</td>
+                        <td> ${data[el].StartTime}</td>
+                        <td> ${data[el].Description}</td>
+                        </tr>`)
+                    }
+                }
+            },
+            error: function (errorThrown) {
+                console.log(errorThrown);
+                saySomething("Sorry, I was unable to do that");
+            }
+        });
+    
+}
+
 function showOctoberPlans() {
     $.ajax({
         url: 'https://localhost:44318/Plans/GetPlansForOctober',
@@ -151,9 +197,7 @@ function showOctoberPlans() {
                         <td> ${data[el].DayOfPlan}</td>
                         <td> ${data[el].MonthOfPlan}</td>
                         <td> ${data[el].StartDate}</td>
-                        <td> ${data[el].EndDate}</td>
                         <td> ${data[el].StartTime}</td>
-                        <td> ${data[el].EndTime}</td>
                         <td> ${data[el].Description}</td>
                         </tr>`)
             }
@@ -238,14 +282,177 @@ function chooseMonth(userInputArray) {
     return Month
 }
 
+function chooseDate(userInputArray) {
+    let Date = "";
+    switch (userInputArray) {
+        case "1st":
+        case "1":
+        case "first":
+            Date = "1"
+            break;
+        case "2nd":
+        case "2":
+        case "second":
+            Date = "2"
+            break;
+        case "3rd":
+        case "3":
+        case "third":
+            Date = "3"
+            break;
+        case "4th":
+        case "4":
+        case "fourth":
+            Date = "4"
+            break;
+        case "5th":
+        case "5":
+        case "fifth":
+            Date = "5"
+            break;
+        case "6th":
+        case "6":
+        case "sixth":
+            Date = "6"
+            break;
+        case "7th":
+        case "7":
+        case "seventh":
+            Date = "7"
+            break;
+        case "8th":
+        case "8":
+        case "eighth":
+            Date = "8"
+            break;
+        case "9th":
+        case "9":
+        case "ninth":
+            Date = "9"
+            break;
+        case "10th":
+        case "10":
+        case "tenth":
+            Date = "10"
+            break;
+        case "11th":
+        case "11":
+        case "eleventh":
+            Date = "11"
+            break;
+        case "12th":
+        case "12":
+        case "twelfth":
+            Date = "12"
+            break;
+        case "13th":
+        case "13":
+        case "thirteenth":
+            Date = "13"
+            break;
+        case "14th":
+        case "14":
+        case "fourteenth":
+            Date = "14"
+            break;
+        case "15th":
+        case "15":
+        case "fifteenth":
+            Date = "15"
+            break;
+        case "16th":
+        case "16":
+        case "sixteenth":
+            Date = "16"
+            break;
+        case "17th":
+        case "17":
+        case "seventeenth":
+            Date = "17"
+            break;
+        case "18th":
+        case "18":
+        case "eighteenth":
+            Date = "18"
+            break;
+        case "19th":
+        case "19":
+        case "nineteenth":
+            Date = "19"
+            break;
+        case "20th":
+        case "20":
+        case "twentieth":
+            Date = "20"
+            break;
+        case "21st":
+        case "21":
+        case "twenty-first":
+            Date = "21"
+            break;
+        case "22nd":
+        case "22":
+        case "twenty-second":
+            Date = "22"
+            break;
+        case "23rd":
+        case "23":
+        case "twenty-third":
+            Date = "23"
+            break;
+        case "24th":
+        case "24":
+        case "twenty-fourth":
+            Date = "24"
+            break;
+        case "25th":
+        case "25":
+        case "twenty-fifth":
+            Date = "25"
+            break;
+        case "26th":
+        case "26":
+        case "twenty-sixth":
+            Date = "26"
+            break;
+        case "27th":
+        case "27":
+        case "twenty-seventh":
+            Date = "27"
+            break;
+        case "28th":
+        case "28":
+        case "twenty-eighth":
+            Date = "28"
+            break;
+        case "29th":
+        case "29":
+        case "twenty-ninth":
+            Date = "29"
+            break;
+        case "30th":
+        case "30":
+        case "thirtieth":
+            Date = "30"
+            break;
+        case "31st":
+        case "31st":
+        case "thirty-first":
+            Date = "31"
+            break;
+        default: "Not a date"
+    }
+    return Date;
+}
+
 function CreatePlan(userInputArray) {
 
     var obj = {
         Name: userInputArray[1],
-        DayOfPlan: userInputArray[userInputArray.length - 3],
-        MonthOfPlan: userInputArray[userInputArray.length - 2],
-        StartDate: chooseMonth(userInputArray[userInputArray.length - 2]) + "/" + userInputArray[userInputArray.length - 1] + "/" + currentYear,
-        StartTime: null,
+        DayOfPlan: userInputArray[userInputArray.length - 6],
+        MonthOfPlan: userInputArray[userInputArray.length - 5],
+        StartDate: chooseMonth(userInputArray[userInputArray.length - 5]) + "/" + chooseDate(userInputArray[userInputArray.length - 4]) + "/" + currentYear,
+        StartTime: userInputArray[userInputArray.length - 2] + " " + userInputArray[userInputArray.length - 1],
         Description: userInputArray[1] + " " + userInputArray[2] + " " + userInputArray[3],
     };
 
