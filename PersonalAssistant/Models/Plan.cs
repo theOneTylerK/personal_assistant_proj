@@ -15,13 +15,8 @@ namespace PersonalAssistant.Models
         [Display(Name = "Day of Plan")]
         public string DayOfPlan { get; set; }
         public string MonthOfPlan { get; set; }
-        [DataType(DataType.Date)]
-        public DateTime StartDate { get; set; }
-
-        [DataType(DataType.Date)]
-        public DateTime EndDate { get; set; }
+        public string StartDate { get; set; }
         public string StartTime { get; set; }
-        public string EndTime { get; set; }
         public string Description { get; set; }
 
     }

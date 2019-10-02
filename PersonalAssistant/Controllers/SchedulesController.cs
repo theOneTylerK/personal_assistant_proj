@@ -46,7 +46,7 @@ namespace PersonalAssistant.Controllers
             {
                 var startDate = DateTime.Parse(schedule.StartDate).Date;
                 var endDate = DateTime.Parse(schedule.EndDate).Date;
-                var plans = db.Plans.Where(p => p.StartDate >= startDate && p.EndDate <= endDate).ToList();
+                var plans = db.Plans.Where(p => DateTime.Parse(p.StartDate) >= startDate).ToList();
                 plans.Sort();
                 return View("Index", "Plans");
             }
@@ -67,8 +67,7 @@ namespace PersonalAssistant.Controllers
             else
             {
                 var startDate = DateTime.Parse(schedule.StartDate).Date;
-                var endDate = DateTime.Parse(schedule.EndDate).Date;
-                var plans = db.Plans.Where(p => p.StartDate >= startDate && p.EndDate <= endDate).ToList();
+                var plans = db.Plans.Where(p => DateTime.Parse(p.StartDate) >= startDate).ToList();
                 plans.Sort();
                 return View(plans);
             }

@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using PersonalAssistant.Models;
 
@@ -21,14 +22,14 @@ namespace PersonalAssistant.Controllers
             var today = DateTime.Now.Date;
             if (input == null)
             {
-                return View(db.Plans.Where(p=>p.StartDate == today).ToList());
+                return View(db.Plans.Where(p => DateTime.Parse(p.StartDate) == today).ToList());
             }
             else
             {
                 if (input.Contains("/"))
                 {
                     var Date = DateTime.Parse(input).Date;
-                    filterListOfPlans = db.Plans.Where(p => p.StartDate == Date).ToList();
+                    filterListOfPlans = db.Plans.Where(p => DateTime.Parse(p.StartDate) == Date).ToList();
                     return View(filterListOfPlans);
                 }
                 else
@@ -36,7 +37,7 @@ namespace PersonalAssistant.Controllers
                     filterListOfPlans = db.Plans.Where(p => p.DayOfPlan == input).ToList();
                     return View(filterListOfPlans);
                 }
-               
+
             }
         }
         [HttpGet]
@@ -44,24 +45,14 @@ namespace PersonalAssistant.Controllers
         {
             List<Plan> ListOfPlans = new List<Plan>();
             ListOfPlans = db.Plans.ToList();
-            foreach(Plan plan in ListOfPlans)
-            {
-                plan.StartDate.Date.ToString();
-                plan.EndDate.Date.ToString();
-            }
-            return Json (ListOfPlans, JsonRequestBehavior.AllowGet);
+            return Json(ListOfPlans, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         public JsonResult GetPlansForOctober()
         {
             List<Plan> ListOfPlans = new List<Plan>();
-            ListOfPlans = db.Plans.Where(p=>p.MonthOfPlan == "October").ToList();
-            foreach (Plan plan in ListOfPlans)
-            {
-                plan.StartDate.Date.ToString();
-                plan.EndDate.Date.ToString();
-            }
+            ListOfPlans = db.Plans.Where(p => p.MonthOfPlan == "October").ToList();
             return Json(ListOfPlans, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
@@ -69,11 +60,6 @@ namespace PersonalAssistant.Controllers
         {
             List<Plan> ListOfPlans = new List<Plan>();
             ListOfPlans = db.Plans.Where(p => p.MonthOfPlan == "November").ToList();
-            foreach (Plan plan in ListOfPlans)
-            {
-                plan.StartDate.Date.ToString();
-                plan.EndDate.Date.ToString();
-            }
             return Json(ListOfPlans, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
@@ -81,12 +67,21 @@ namespace PersonalAssistant.Controllers
         {
             List<Plan> ListOfPlans = new List<Plan>();
             ListOfPlans = db.Plans.Where(p => p.MonthOfPlan == "December").ToList();
-            foreach (Plan plan in ListOfPlans)
-            {
-                plan.StartDate.Date.ToString();
-                plan.EndDate.Date.ToString();
-            }
             return Json(ListOfPlans, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public void CreateNewPlan(Plan plan)
+        {
+            db.Plans.Add(plan);
+            db.SaveChanges();
+        }
+        [HttpPost]
+        public void DeletePlan(Plan plan)
+        {
+            /*List<string> userInputList = userInput.Split(' ').ToList()*/;
+            var PlanToDelete = db.Plans.Where(p => p.Name == plan.Name && p.DayOfPlan == plan.DayOfPlan).FirstOrDefault();
+            db.Plans.Remove(PlanToDelete);
+            db.SaveChanges();
         }
 
         // GET: Plans/Details/5
@@ -103,29 +98,7 @@ namespace PersonalAssistant.Controllers
             }
             return View(plan);
         }
-        //public ActionResult ListPlans(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    var thisPlan = db.Plans.Where(p => p.Id == id).FirstOrDefault();
-        //    Schedule schedule = db.Schedules.Where(s=>s.ScheduleId == thisPlan.ScheduleId).FirstOrDefault();
-        //    if (schedule == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    else
-        //    {
-        //        var startDate = DateTime.Parse(schedule.StartDate).Date;
-        //        var endDate = DateTime.Parse(schedule.EndDate).Date;
-        //        var plans = db.Plans.Where(p => p.StartDate >= startDate && p.EndDate <= endDate).ToList();
-        //        plans.Sort();
-        //        return View(plans);
-        //    }
-
-        //}
-
+        
         // GET: Plans/Create
         public ActionResult Create()
         {
@@ -181,6 +154,7 @@ namespace PersonalAssistant.Controllers
         }
 
         // GET: Plans/Delete/5
+        
         public ActionResult Delete(int? id)
         {
             if (id == null)

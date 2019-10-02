@@ -7,7 +7,7 @@
 @{
     ViewData["Title"] = "Alfred";
 }
-
+<h8>You can talk to Alfred by either writing him a message below or holding down the Q button on your keyboard and then speaking.</h8>
 <form>
     <div class="jumbotron" ; style="opacity: 0.8;">
         <div class="row">
@@ -27,31 +27,52 @@
     <form id="my-form" class="simple-form">
         <input type="text" id="input" name="userMessage" placeholder="Talk to Alfred here" />
         <button type="button" id="button1" onclick="alfredTalk()">Send Message</button>
-        <button type="button" id="button2" onclick="startListening()">Use Speech Recognition</button>
+        @*<button type="button" id="button2" onclick="startListening()">Use Speech Recognition</button>*@
     </form>
 </div>
-
-<table id="my-table" border="1px solid black">
-    <tr>
-        <th>Name</th>
-        <th>Day of Plan</th>
-        <th>Month of Plan</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th>Start Time</th>
-        <th>End Time</th>
-        <th>Description</th>
-    </tr>
-</table>
-
+<br />
+<br />
+<form>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <table id="my-table" border="1px solid black" width="100%">
+                <tr>
+                    <th>Name</th>
+                    @*<th>Day of Plan</th>
+                <th>Month of Plan</th>*@
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Description</th>
+                </tr>
+            </table>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</form>
 
 <script>
+
+</script>
+
+<script>
+    document.onkeydown = function (e) {
+        if (e.key == "q") {
+            recognition.start();
+        }
+    }
+
     window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
     let finalTranscript = '';
     let recognition = new window.SpeechRecognition();
     recognition.interimResults = true;
     recognition.maxAlternatives = 10;
     recognition.continuous = false;
+    recognition.onspeechstart = function () {
+        recognition.start();
+    }
     recognition.onresult = (event) => {
         let interimTranscript = '';
         for (let i = event.resultIndex, len = event.results.length; i < len; i++) {
