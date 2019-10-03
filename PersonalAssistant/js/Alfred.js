@@ -151,10 +151,7 @@ function showTodayPlans() {
             type: 'get',
             //contentType: 'application/json',
             success: function (data) {
-                for (i = 1; i < rows; i++) {
-                    document.getElementById("my-table").deleteRow(i);
-                    i++;
-                }
+                document.getElementById("table-body").innerHTML = ""
                 console.log(data);
                 if (data[0] == null) {
                     saySomething("Looks like your day is wide open.")
@@ -189,6 +186,7 @@ function showOctoberPlans() {
         type: 'get',
         //contentType: 'application/json',
         success: function (data) {
+            document.getElementById("table-body").innerHTML = ""
             console.log(data);
             for (let el in data) {
                 $("#my-table").append(
@@ -216,15 +214,16 @@ function showNovemberPlans() {
         type: 'get',
         //contentType: 'application/json',
         success: function (data) {
+            document.getElementById("table-body").innerHTML = ""
             console.log(data);
             for (let el in data) {
                 $("#my-table").append(
                     `<tr>
                         <td>${data[el].Name}</td>
+                        <td> ${data[el].DayOfPlan}</td>
+                        <td> ${data[el].MonthOfPlan}</td>
                         <td> ${data[el].StartDate}</td>
-                        <td> ${data[el].EndDate}</td>
                         <td> ${data[el].StartTime}</td>
-                        <td> ${data[el].EndTime}</td>
                         <td> ${data[el].Description}</td>
                         </tr>`)
             }

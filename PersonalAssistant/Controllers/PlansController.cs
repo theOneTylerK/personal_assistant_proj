@@ -97,7 +97,6 @@ namespace PersonalAssistant.Controllers
         [HttpPost]
         public void DeletePlan(Plan plan)
         {
-            /*List<string> userInputList = userInput.Split(' ').ToList()*/;
             var PlanToDelete = db.Plans.Where(p => p.Name == plan.Name && p.DayOfPlan == plan.DayOfPlan).FirstOrDefault();
             db.Plans.Remove(PlanToDelete);
             db.SaveChanges();
