@@ -45,6 +45,18 @@ function alfredTalk(userInput) {
         let userInputArray = userInput.split(" ");
         DeletePlan(userInputArray);
     }
+    else if ((userInput.includes("weather"))) {
+
+        document.getElementById("alfredResponse").innerHTML = "Here is what the current weather is.";
+        saySomething("Here is what the current weather is.");
+        GetCurrentWeather();
+    }
+    else if ((userInput.includes("events") && userInput.includes("in my area"))) {
+
+        document.getElementById("alfredResponse").innerHTML = "These local events look interesting";
+        saySomething("These local events look interesting")
+        GetLocalEvents();
+    }
     else if ((userInput.includes("show") || userInput.includes("see")) && (userInput.includes("schedule") || userInput.includes("calendar")) && ((!userInput.includes("october") && !userInput.includes("October")) && (!userInput.includes("november") && !userInput.includes("November")))) {
         document.getElementById("alfredResponse").innerHTML = "Of course! Here you go.";
         saySomething("Of course! Here you go.");
@@ -82,36 +94,6 @@ function saySomething(alfredResponse) {
 }
 
 
-//(function ($) {
-//    function AddPlan(e) {
-//        var obj = {
-//            Name: this["Name"].value,
-//            DayOfPlan: this["DayOfPlan"].value,
-//            MonthOfPlan: this["MonthOfPlan"].value
-//               StartDate: this["StartDate"].value
-//               EndDate: this["EndDate"].value
-//               StartTime: this["StartTime"].value
-//               EndTime: this["EndTime"].value
-//               Description: this["Description"].value
-
-//        };
-
-//        $.ajax({
-//            url: 'https://localhost:44318/Plans/Index',
-//            dataType: 'json',
-//            type: 'get',
-//            contentType: 'application/json',
-//            data: JSON.stringify(obj),
-//            success: function (data) {
-//                $("#my-table tr").remove()
-//                makeTable();
-//            },
-//            error: function (errorThrown) {
-//                console.log(errorThrown);
-//            }
-//        });
-//    }
-
 function showPlans() {
 
         $.ajax({
@@ -120,8 +102,10 @@ function showPlans() {
             type: 'get',
             //contentType: 'application/json',
             success: function (data) {
+                document.getElementById("table-body").innerHTML = "";
+                document.getElementById("events-body").innerHTML = "";
                 console.log(data);
-                saySomething("Here is what you have going on today.")
+                saySomething("Here are all the things you have in your schedule.")
                 for (let el in data) {
                     $("#my-table").append(
                         `<tr>
@@ -151,7 +135,8 @@ function showTodayPlans() {
             type: 'get',
             //contentType: 'application/json',
             success: function (data) {
-                document.getElementById("table-body").innerHTML = ""
+                document.getElementById("table-body").innerHTML = "";
+                document.getElementById("events-body").innerHTML = "";
                 console.log(data);
                 if (data[0] == null) {
                     saySomething("Looks like your day is wide open.")
@@ -186,7 +171,8 @@ function showOctoberPlans() {
         type: 'get',
         //contentType: 'application/json',
         success: function (data) {
-            document.getElementById("table-body").innerHTML = ""
+            document.getElementById("table-body").innerHTML = "";
+            document.getElementById("events-body").innerHTML = "";
             console.log(data);
             for (let el in data) {
                 $("#my-table").append(
@@ -214,7 +200,8 @@ function showNovemberPlans() {
         type: 'get',
         //contentType: 'application/json',
         success: function (data) {
-            document.getElementById("table-body").innerHTML = ""
+            document.getElementById("table-body").innerHTML = "";
+            document.getElementById("events-body").innerHTML = "";
             console.log(data);
             for (let el in data) {
                 $("#my-table").append(
@@ -492,7 +479,65 @@ function DeletePlan(userInputArray) {
             saySomething("Your event has been removed");
         },
         error: function (errorThrown) {
-            saySomething("Your event has been removed");
+            saySomething("I'm sorry. I am unable to do that.");
+        }
+    });
+}
+
+function GetLocalEvents() {
+
+    $.ajax({
+        url: 'https://www.eventbriteapi.com/v3/events/search/?token=3O5MC6XYKZ7MIDZ3SKBD&location.address=milwaukee&location.within=10km&expand=venue',
+        dataType: 'json',
+        //contentType: 'application/json',
+        type: 'get',
+        //data: JSON.stringify(obj),
+        success: function (data) {
+            document.getElementById("table-body").innerHTML = "";
+            document.getElementById("events-body").innerHTML = "";
+            console.log(data)
+            let events = data.events;
+            for (let el in events) {
+                $("#events-table").append(
+                    `<tr>
+                        <td>${events[el].name.text}</td>
+                        <td> ${events[el].description.text}</td>
+                        <td><a href = ${events[el].url}> ${events[el].url}</a></td>
+                        </tr>`)
+            }
+        },
+        error: function (errorThrown) {
+            saySomething("I'm sorry. I was unable to do that.");
+        }
+    });
+}
+
+function GetCurrentWeather() {
+
+   
+
+    $.ajax({
+        url: 'https://api.openweathermap.org/data/2.5/weather?q=Milwaukee&APPID=214c7e28b011e14c76a74967850fcfee',
+        dataType: 'json',
+        //contentType: 'application/json',
+        type: 'get',
+        //data: JSON.stringify(obj),
+        success: function (data) {
+            document.getElementById("table-body").innerHTML = "";
+            document.getElementById("events-body").innerHTML = "";
+            console.log(data)
+            //let events = data.events;
+            //for (let el in events) {
+            //    $("#events-table").append(
+            //        `<tr>
+            //            <td>${events[el].name.text}</td>
+            //            <td> ${events[el].description.text}</td>
+            //            <td><a href = ${events[el].url}> ${events[el].url}</a></td>
+            //            </tr>`)
+            //}
+        },
+        error: function (errorThrown) {
+            saySomething("I'm sorry. I was unable to do that.");
         }
     });
 }
