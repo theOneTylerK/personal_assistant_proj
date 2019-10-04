@@ -22,14 +22,25 @@ namespace PersonalAssistant.Controllers
             var today = DateTime.Now.Date;
             if (input == null)
             {
-                return View(db.Plans.Where(p => DateTime.Parse(p.StartDate) == today).ToList());
+                var todayString = today.ToString();
+                if (todayString.Count() == 21)
+                {
+                    var noTimeToday = todayString.Substring(0, 9);
+                    filterListOfPlans = db.Plans.Where(p => p.StartDate == noTimeToday).ToList();
+                }
+                else
+                {
+                    var noTimeToday = todayString.Substring(0, 10);
+                    filterListOfPlans = db.Plans.Where(p => p.StartDate == noTimeToday).ToList();
+                }
+                return View(filterListOfPlans);
             }
             else
             {
                 if (input.Contains("/"))
                 {
-                    var Date = DateTime.Parse(input).Date;
-                    filterListOfPlans = db.Plans.Where(p => DateTime.Parse(p.StartDate) == Date).ToList();
+                  
+                    filterListOfPlans = db.Plans.Where(p => p.StartDate == input).ToList();
                     return View(filterListOfPlans);
                 }
                 else

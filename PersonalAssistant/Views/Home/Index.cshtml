@@ -9,34 +9,55 @@
 }
 <h8>You can talk to Alfred by either writing him a message below or holding down the Q button on your keyboard and then speaking.</h8>
 <form>
-    <div class="jumbotron" ; style="opacity: 0.8;">
+    <div class="jumbotron" ; style="opacity: 0.8; background-color: #b8e3f5">
         <div class="row">
-            <div class="col-sm-4">
-                <textarea class="target" id="userResponse" rows="5"></textarea>
+            <div class="col-sm-5">
+                <center>
+                    <textarea class="target" id="userResponse" rows="5" style="opacity: 0.8; width: 200%"></textarea>
+                </center>
             </div>
-            <div class="col-sm-4" , id="alfredResponse"></div>
-            <div class="col-sm-4"></div>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-5">
+                <center>
+                    <textarea class="target" id="alfredResponse" rows="5" style="opacity: 0.8; width: 200%"></textarea>
+                </center>
+            </div>
         </div>
     </div>
 </form>
-
+ @*, id="alfredResponse"*@
 <br />
 <br />
 
 <div>
     <form id="my-form" class="simple-form">
-        <input type="text" id="input" name="userMessage" placeholder="Talk to Alfred here" />
-        <button type="button" id="button1" onclick="alfredTalk()">Send Message</button>
-        @*<button type="button" id="button2" onclick="startListening()">Use Speech Recognition</button>*@
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <center>
+                    <input type="text" id="input" style="width: 200%" name="userMessage" placeholder="Talk to Alfred here" />
+                    <button type="button" class="btn-info" id="button1" onclick="alfredTalk()">Send Message</button>
+                    @*<button type="button" id="button2" onclick="startListening()">Use Speech Recognition</button>*@
+                </center>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
     </form>
 </div>
 <br />
 <br />
+<div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <h4 style="text-decoration: underline">Ask me to see your schedule here</h4>
+    </div>
+    <div class="col-sm-4"></div>
+</div>
 <form>
     <div class="row">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-8">
-            <table id="my-table" border="1px solid black" width="100%">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <table id="my-table" class="table-info" border="1px solid black" width="100%">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -48,19 +69,27 @@
                     </tr>
                 </thead>
                 <tbody id="table-body">
-
                 </tbody>
             </table>
         </div>
-        <div class="col-sm-2"></div>
+        <div class="col-md-1"></div>
     </div>
 </form>
-
+<br />
+<br />
+<br />
+<div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <h4 style="text-decoration: underline">Ask me to see local events happening in your area</h4>
+    </div>
+    <div class="col-sm-4"></div>
+</div>
 <form>
     <div class="row">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-8">
-            <table id="events-table" border="2px solid black" width="100%">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+            <table id="events-table" class="table-info" border="2px solid black" width="100%">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -72,7 +101,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-sm-2"></div>
+        <div class="col-sm-1"></div>
     </div>
 </form>
 

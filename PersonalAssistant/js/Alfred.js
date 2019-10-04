@@ -47,8 +47,6 @@ function alfredTalk(userInput) {
     }
     else if ((userInput.includes("weather"))) {
 
-        document.getElementById("alfredResponse").innerHTML = "Here is what the current weather is.";
-        saySomething("Here is what the current weather is.");
         GetCurrentWeather();
     }
     else if ((userInput.includes("events") && userInput.includes("in my area"))) {
@@ -94,15 +92,11 @@ function alfredTalk(userInput) {
         let userInputArray = userInput.split(' ');
         changeBackgroundColor(userInputArray);
     }
-    else{
-        document.getElementById("alfredResponse").innerHTML = "I'm sorry, but I'm at a loss for words.";
-        saySomething("I'm sorry, but I'm at a loss for words.");
-        let userInputArray = userInput.split(' ');
-        changeBackgroundColor(userInputArray);
-    }
-    
-
-
+    //else{
+    //    document.getElementById("alfredResponse").innerHTML = "I'm sorry, but I'm at a loss for words.";
+    //    saySomething("I'm sorry, but I'm at a loss for words.");
+    //}
+   
 }
 
 function saySomething(alfredResponse) {
@@ -119,7 +113,7 @@ function saySomething(alfredResponse) {
 
 function changeBackgroundColor(userInputArray) {
     if (userInputArray[userInputArray.length - 1] == "normal") {
-        document.body.style.backgroundColor = "White";
+        document.body.style.backgroundImage = url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOo4_AlIgWBOWAW56BHrqkS2kvwiP-SWkM2J07Pm-deMgk1rKCtw');
     }
     else{
         document.body.style.backgroundColor = userInputArray[userInputArray.length - 1];
@@ -547,8 +541,6 @@ function GetLocalEvents() {
 
 function GetCurrentWeather() {
 
-   
-
     $.ajax({
         url: 'https://api.openweathermap.org/data/2.5/weather?q=Milwaukee&APPID=214c7e28b011e14c76a74967850fcfee',
         dataType: 'json',
@@ -559,15 +551,25 @@ function GetCurrentWeather() {
             document.getElementById("table-body").innerHTML = "";
             document.getElementById("events-body").innerHTML = "";
             console.log(data)
-            //let events = data.events;
-            //for (let el in events) {
-            //    $("#events-table").append(
-            //        `<tr>
-            //            <td>${events[el].name.text}</td>
-            //            <td> ${events[el].description.text}</td>
-            //            <td><a href = ${events[el].url}> ${events[el].url}</a></td>
-            //            </tr>`)
-            //}
+            let currentTemperature = data.main.temp;
+            let highTemperature = data.main.temp_max;
+            let lowTemperature = data.main.temp_min;
+            console.log(currentTemperature);
+            let fahrenheitCurrentTemp = (currentTemperature * (9 / 5) - 459.67);
+            let fahrenheitHighTemp = (highTemperature * (9 / 5) - 459.67);
+            let fahrenheitLowTemp = (lowTemperature * (9 / 5) - 459.67);
+            let roundedCurrentTemp = Math.round(fahrenheitCurrentTemp);
+            let roundedLowTemp = Math.round(fahrenheitLowTemp);
+            let roundedHighTemp = Math.round(fahrenheitHighTemp);
+            let weatherConditions = data.weather;
+            let conditions = "";
+            for (let el in weatherConditions) {
+                conditions = weatherConditions[el].description;
+            }
+            console.log(conditions);
+            document.getElementById("alfredResponse").innerHTML = "The current temperature in Milwaukee is " + roundedCurrentTemp.toString() + " degrees Fahrenheit. The forcast shows " + conditions + " as the current conditions. The high for today is " + roundedHighTemp.toString() + " degrees and the low is " + roundedLowTemp.toString() + " degrees.";
+            saySomething("The current temperature in Milwaukee is " + roundedCurrentTemp.toString() + " degrees Fahrenheit. The forcast shows " + conditions + " as the current conditions. The high for today is " + roundedHighTemp.toString() + " degrees and the low is " + roundedLowTemp.toString() + " degrees.");
+            
         },
         error: function (errorThrown) {
             saySomething("I'm sorry. I was unable to do that.");
