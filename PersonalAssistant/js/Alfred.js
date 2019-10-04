@@ -77,6 +77,30 @@ function alfredTalk(userInput) {
         saySomething("Sure. Just a moment.");
         showTodayPlans();
     }
+    else if (userInput.includes("background") && (userInput.includes("color") && !userInput.includes("Green"))) {
+        document.getElementById("alfredResponse").innerHTML = "Absolutely. How's this?";
+        saySomething("Absolutely. How's this?");
+        let userInputArray = userInput.split(' ');
+        changeBackgroundColor(userInputArray);
+    }
+    else if (userInput.includes("background") && userInput.includes("Green")) {
+        document.getElementById("alfredResponse").innerHTML = "Don't make me angry. You wouldn't like me when I'm angry! ... Ha ha ha. Just kidding. But you are getting a little crazy, don't you think?";
+        saySomething("Don't make me angry. You wouldn't like me when I'm angry!");
+        saySomething("Ha ha ha. Just kidding. But you are getting a little crazy don't you think?");
+    }
+    else if (userInput.includes("background") && userInput.includes("normal")) {
+        document.getElementById("alfredResponse").innerHTML = "I think that is the responsible choice";
+        saySomething("I think that is the responsible choice.");
+        let userInputArray = userInput.split(' ');
+        changeBackgroundColor(userInputArray);
+    }
+    else{
+        document.getElementById("alfredResponse").innerHTML = "I'm sorry, but I'm at a loss for words.";
+        saySomething("I'm sorry, but I'm at a loss for words.");
+        let userInputArray = userInput.split(' ');
+        changeBackgroundColor(userInputArray);
+    }
+    
 
 
 }
@@ -93,6 +117,15 @@ function saySomething(alfredResponse) {
     speechSynthesis.speak(message);
 }
 
+function changeBackgroundColor(userInputArray) {
+    if (userInputArray[userInputArray.length - 1] == "normal") {
+        document.body.style.backgroundColor = "White";
+    }
+    else{
+        document.body.style.backgroundColor = userInputArray[userInputArray.length - 1];
+    }
+    
+}
 
 function showPlans() {
 
