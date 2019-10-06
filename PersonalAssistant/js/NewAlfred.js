@@ -76,9 +76,14 @@ function alfredTalk(userInput) {
         showNovemberPlans();
     }
     else if ((userInput.includes("show") || userInput.includes("see")) && (userInput.includes("schedule") || userInput.includes("calendar")) && (userInput.includes("december") || userInput.includes("December"))) {
-        document.getElementById("alfredResponse").innerHTML = "No problem. Here are your plans for the month of November.";
+        document.getElementById("alfredResponse").innerHTML = "No problem. Here are your plans for the month of December.";
         saySomething("No problem. Here are your plans for the month of December.");
         showDecemberPlans();
+    }
+    else if ((userInput.includes("show") || userInput.includes("see")) && (userInput.includes("schedule") || userInput.includes("to do")) && (userInput.includes("today"))) {
+        document.getElementById("alfredResponse").innerHTML = "Sure. Just a moment";
+        saySomething("Sure. Just a moment");
+        showTodayPlans();
     }
 
 }
