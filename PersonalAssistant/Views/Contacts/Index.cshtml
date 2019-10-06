@@ -1,21 +1,24 @@
 ﻿@model IEnumerable<PersonalAssistant.Models.Contact>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Contacts";
 }
 
-<h2>Index</h2>
+<h2>Your Contacts</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table-info" border="1px solid black" width="55%" style="opacity:0.8;">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+           First Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastName)
+           Last Name
+        </th>
+        <th>
+            Other Options
         </th>
     </tr>
 

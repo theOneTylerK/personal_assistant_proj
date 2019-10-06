@@ -8,26 +8,27 @@
 @using (Html.BeginForm("Index", "Plans", FormMethod.Get))
 {
     @Html.TextBox("Input")
-    <input type="submit" value="Search" />
+    <input type="submit" value="Search" class="btn-info" style="opacity: 0.8;" />
 }
 <p>
-    @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Create New", "Create")
+
 </p>
-<table class="table">
+<table class="table-info" border="1px solid black" width="100%" style="opacity:0.8;">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StartDate)
+            Date of Event
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DayOfPlan)
+           Day Of Plan
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+           Description
         </th>
-        <th></th>
+        <th>Other Options</th>
     </tr>
 
     @foreach (var item in Model)
