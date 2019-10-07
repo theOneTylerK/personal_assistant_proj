@@ -27,10 +27,8 @@ namespace PersonalAssistant.Migrations
                         Name = c.String(),
                         DayOfPlan = c.String(),
                         MonthOfPlan = c.String(),
-                        StartDate = c.DateTime(nullable: false),
-                        EndDate = c.DateTime(nullable: false),
+                        StartDate = c.String(),
                         StartTime = c.String(),
-                        EndTime = c.String(),
                         Description = c.String(),
                     })
                 .PrimaryKey(t => t.Id);

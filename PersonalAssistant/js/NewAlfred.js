@@ -497,6 +497,8 @@ function CreatePlan(userInputArray) {
         contentType: 'application/json',
         data: JSON.stringify(obj),
         success: function (data) {
+            document.getElementById("table-body").innerHTML = "";
+            document.getElementById("events-body").innerHTML = "";
             console.log(data);
             saySomething("Your event was added to the schedule.")
         },
@@ -524,6 +526,8 @@ function DeletePlan(userInputArray) {
         type: 'post',
         data: JSON.stringify(obj),
         success: function (data) {
+            document.getElementById("table-body").innerHTML = "";
+            document.getElementById("events-body").innerHTML = "";
             saySomething("Your event has been removed");
         },
         error: function (errorThrown) {
