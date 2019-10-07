@@ -45,7 +45,7 @@ namespace PersonalAssistant.Controllers
                 }
                 else
                 {
-                    filterListOfPlans = db.Plans.Where(p => p.DayOfPlan == input).ToList();
+                    filterListOfPlans = db.Plans.Where(p => p.MonthOfPlan == input).ToList();
                     return View(filterListOfPlans);
                 }
 
@@ -139,7 +139,7 @@ namespace PersonalAssistant.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,DayOfPlan,MonthOfPlan,StartDate,EndDate,StartTime,EndTime,Description")] Plan plan)
+        public ActionResult Create([Bind(Include = "Id,Name,DayOfPlan,MonthOfPlan,StartDate,StartTime,Description")] Plan plan)
         {
             if (ModelState.IsValid)
             {
@@ -171,7 +171,7 @@ namespace PersonalAssistant.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,DayOfPlan,StartDate,EndDate,StartTime,EndTime,Description")] Plan plan)
+        public ActionResult Edit([Bind(Include = "Id,Name,DayOfPlan,MonthOfPlan,StartDate,StartTime,Description")] Plan plan)
         {
             if (ModelState.IsValid)
             {
