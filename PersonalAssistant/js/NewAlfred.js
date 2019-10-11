@@ -89,7 +89,7 @@ function alfredTalk(userInput) {
         document.getElementById("alfredResponse").innerHTML = "Just a moment while I write that down.";
         saySomething("Just a moment while I write that down.");
         let userInputArray = userInput.split(" ");
-        userMessage = userInputArray.slice(8, -1);
+        userMessage = userInputArray.slice(7, userInput.length - 1);
         SendEmail(userInputArray, userMessage);
     }
 
@@ -610,12 +610,12 @@ function GetCurrentWeather() {
     });
 }
 
-function SendEmail(userInputArray, userMessage) {
+function SendEmail(userInputArray, userMessage) { 
 
     var obj = {
         FirstName: userInputArray[1],
         LastName: userInputArray[2],
-        Subject: userInputArray[5] + userInputArray[6],
+        Subject: userInputArray[4] + " " + userInputArray[5],
         Message: userMessage.toString(),
     };
 

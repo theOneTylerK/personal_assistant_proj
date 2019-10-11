@@ -134,7 +134,7 @@ namespace PersonalAssistant.Controllers
             var toAddress = new MailAddress($"{currentContact.EmailAddress}", $"{currentContact.FirstName} {currentContact.LastName}");
             string password = "TacoCat24$$";
             string subject = email.Subject;
-            string body = email.Message;
+            string body = email.Message.Replace(","," ");
 
             var smtp = new SmtpClient
             {
