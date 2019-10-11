@@ -18,7 +18,7 @@ function alfredTalk(userInput) {
         document.getElementById("userResponse").innerHTML = userInput;
         userInput.toLowerCase();
     }
-    if (userInput.includes("hello") || userInput.includes("hi") || userInput.includes("greetings")) {
+    if (userInput.includes("hello") || userInput.includes("hi") || userInput.includes("greetings") && !userInput.includes("email")) {
         var AlfredGreetingsDictionary =
         {
             0: "Hello there. How can I help you today?",
@@ -37,11 +37,11 @@ function alfredTalk(userInput) {
         saySomething("Hello. My name is Alfred, and just like Master Bruce, I too moonlight as a different persona, albeit of a very different nature. While Master Bruce prefers fighting crime, I prefer to fight disorganization in people’s personal lives. That is why I choose to spend my spare time as a personal assistant bot, who is built using MVC 5, and I can make API calls using jay query and ayjax. I am perfectly capable of handling full sentences, and I look forward to continue to learn more in order to help my users. Of course, with that said, I am simply just here to assist you. Now, where should we begin?");
     }
     else if ((userInput.includes("create") || userInput.includes("add") || (userInput.includes("new") && (userInput.includes("event") || userInput.includes("meeting")))) && (userInput.includes("schedule") || userInput.includes("calendar"))) {
-
-        document.getElementById("alfredResponse").innerHTML = "No problem. Just a moment while I take care of that for you.";
-        saySomething("No problem. Just a moment while I take care of that for you.")
         let userInputArray = userInput.split(" ");
         CreatePlan(userInputArray);
+        document.getElementById("alfredResponse").innerHTML = "No problem. Just a moment while I take care of that for you.";
+        saySomething("No problem. Just a moment while I take care of that for you.")
+        
     }
     else if ((userInput.includes("remove") || userInput.includes("cancel") || (userInput.includes("delete")))) {
 
@@ -84,6 +84,13 @@ function alfredTalk(userInput) {
         document.getElementById("alfredResponse").innerHTML = "Sure. Just a moment";
         saySomething("Sure. Just a moment");
         showTodayPlans();
+    }
+    else if (userInput.includes("email")){
+        document.getElementById("alfredResponse").innerHTML = "Just a moment while I write that down.";
+        saySomething("Just a moment while I write that down.");
+        let userInputArray = userInput.split(" ");
+        userMessage = userInputArray.slice(8, -1);
+        SendEmail(userInputArray, userMessage);
     }
 
 }
@@ -602,3 +609,32 @@ function GetCurrentWeather() {
         }
     });
 }
+
+function SendEmail(userInputArray, userMessage) {
+
+    var obj = {
+        FirstName: userInputArray[1],
+        LastName: userInputArray[2],
+        Subject: userInputArray[5] + userInputArray[6],
+        Message: userMessage.toString(),
+    };
+
+    $.ajax({
+        url: 'https://localhost:44318/Contacts/sendEmail',
+        //dataType: 'json',
+        type: 'post',
+        contentType: 'application/json',
+        data: JSON.stringify(obj),
+        success: function (data) {
+            document.getElementById("table-body").innerHTML = "";
+            document.getElementById("events-body").innerHTML = "";
+            console.log(data);
+            saySomething("Your email has been sent to " + obj.FirstName)
+            document.getElementById("table-body").innerHTML = "Your email has been sent to " + obj.FirstName;
+        },
+        error: function (errorThrown) {
+            console.log(errorThrown);
+        }
+    });
+}
+

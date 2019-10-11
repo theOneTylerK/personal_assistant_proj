@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PersonalAssistant.Models;
+using System.Net.Mail;
 
 namespace PersonalAssistant.Controllers
 {
@@ -124,6 +125,35 @@ namespace PersonalAssistant.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        [HttpPost]
+        public void sendEmail(Email email)
+        {
+            var currentContact = db.Contacts.Where(c => c.FirstName == email.FirstName && c.LastName == email.LastName).FirstOrDefault();
+            var fromAddress = new MailAddress("test.sweepstakesannouncer@gmail.com", "Sweepstakes Announcer");
+            var toAddress = new MailAddress($"{currentContact.EmailAddress}", $"{currentContact.FirstName} {currentContact.LastName}");
+            string password = "TacoCat24$$";
+            string subject = email.Subject;
+            string body = email.Message;
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential("test.sweepstakesannouncer", password)
+            };
+
+            using (var message = new MailMessage(fromAddress, toAddress))
+            {
+                string Subject = subject;
+                body = email.Message;
+            }
+            {
+                smtp.Send(fromAddress.Address, toAddress.Address, subject, body);
+            }
         }
     }
 }
