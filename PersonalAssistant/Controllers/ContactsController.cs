@@ -149,7 +149,7 @@ namespace PersonalAssistant.Controllers
             using (var message = new MailMessage(fromAddress, toAddress))
             {
                 string Subject = subject;
-                body = email.Message;
+                body = email.Message.Replace(",", " ");
             }
             {
                 smtp.Send(fromAddress.Address, toAddress.Address, subject, body);
