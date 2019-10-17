@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using PersonalAssistant.Models;
 using System.Net.Mail;
+using MailKit.Net.Imap;
+using MailKit;
 
 namespace PersonalAssistant.Controllers
 {
@@ -149,11 +151,19 @@ namespace PersonalAssistant.Controllers
             using (var message = new MailMessage(fromAddress, toAddress))
             {
                 string Subject = subject;
-                body = email.Message.Replace(",", " ");
+                string Body = body;
             }
             {
                 smtp.Send(fromAddress.Address, toAddress.Address, subject, body);
             }
         }
+
+        [HttpPost]
+        public JsonResult GetContactInfo(Contact contact)
+        {
+            var contactToDisplay = db.Contacts.Where(c => c.FirstName == contact.FirstName && c.LastName == contact.LastName).FirstOrDefault();
+            return Json(contactToDisplay, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
