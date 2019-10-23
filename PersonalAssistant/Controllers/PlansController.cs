@@ -52,6 +52,13 @@ namespace PersonalAssistant.Controllers
             }
         }
         [HttpGet]
+        public JsonResult GetLocalEvents()
+        {
+            var localEvents = db.Events.ToList();
+            return Json(localEvents, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
         public JsonResult GetPlans()
         {
             List<Plan> ListOfPlans = new List<Plan>();

@@ -265,10 +265,23 @@
     <Compile Include="Migrations\201910111927175_EmailMigration.Designer.cs">
       <DependentUpon>201910111927175_EmailMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910211435111_EventMigration.cs" />
+    <Compile Include="Migrations\201910211435111_EventMigration.Designer.cs">
+      <DependentUpon>201910211435111_EventMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910211506475_AnotherEventMigration.cs" />
+    <Compile Include="Migrations\201910211506475_AnotherEventMigration.Designer.cs">
+      <DependentUpon>201910211506475_AnotherEventMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910211544038_SeedMigration.cs" />
+    <Compile Include="Migrations\201910211544038_SeedMigration.Designer.cs">
+      <DependentUpon>201910211544038_SeedMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\Email.cs" />
+    <Compile Include="Models\Event.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Plan.cs" />
@@ -384,6 +397,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910111927175_EmailMigration.resx">
       <DependentUpon>201910111927175_EmailMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910211435111_EventMigration.resx">
+      <DependentUpon>201910211435111_EventMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910211506475_AnotherEventMigration.resx">
+      <DependentUpon>201910211506475_AnotherEventMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910211544038_SeedMigration.resx">
+      <DependentUpon>201910211544038_SeedMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

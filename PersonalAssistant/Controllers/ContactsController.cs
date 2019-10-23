@@ -129,32 +129,73 @@ namespace PersonalAssistant.Controllers
             base.Dispose(disposing);
         }
         [HttpPost]
-        public void sendEmail(Email email)
+        public JsonResult sendEmail(Email email)
         {
-            var currentContact = db.Contacts.Where(c => c.FirstName == email.FirstName && c.LastName == email.LastName).FirstOrDefault();
-            var fromAddress = new MailAddress("test.sweepstakesannouncer@gmail.com", "Sweepstakes Announcer");
-            var toAddress = new MailAddress($"{currentContact.EmailAddress}", $"{currentContact.FirstName} {currentContact.LastName}");
-            string password = "TacoCat24$$";
-            string subject = email.Subject;
-            string body = email.Message.Replace(","," ");
-
-            var smtp = new SmtpClient
+            if (email.Message == null || email.Subject == null)
             {
-                Host = "smtp.gmail.com",
-                Port = 587,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential("test.sweepstakesannouncer", password)
-            };
+                //var currentContact = db.Contacts.Where(c => c.FirstName == email.FirstName && c.LastName == email.LastName).FirstOrDefault();
+                //var fromAddress = new MailAddress("test.sweepstakesannouncer@gmail.com", "Sweepstakes Announcer");
+                //var toAddress = new MailAddress($"{currentContact.EmailAddress}", $"{currentContact.FirstName} {currentContact.LastName}");
+                //string password = "TacoCat24$$";
+                //string subject = email.Subject;
+                //string body = " ";
+                //var smtp = new SmtpClient
+                //{
+                //    Host = "smtp.gmail.com",
+                //    Port = 587,
+                //    EnableSsl = true,
+                //    DeliveryMethod = SmtpDeliveryMethod.Network,
+                //    UseDefaultCredentials = false,
+                //    Credentials = new NetworkCredential("test.sweepstakesannouncer", password)
+                //};
 
-            using (var message = new MailMessage(fromAddress, toAddress))
-            {
-                string Subject = subject;
-                string Body = body;
+                //using (var message = new MailMessage(fromAddress, toAddress))
+                //{
+                //    string Subject = subject;
+                //    string Body = body;
+                //}
+                //{
+                //    smtp.Send(fromAddress.Address, toAddress.Address, subject, body);
+                //}
+                var errorMessage = "I was unable to do that. Please be sure to include both a subject and a message when sending an email.";
+                return Json(errorMessage, JsonRequestBehavior.AllowGet);
             }
+            else
             {
-                smtp.Send(fromAddress.Address, toAddress.Address, subject, body);
+                var currentContact = db.Contacts.Where(c => c.FirstName == email.FirstName && c.LastName == email.LastName).FirstOrDefault();
+                if(currentContact == null)
+                {
+                    var errorMessage = "I was unable to find a contact with that name.";
+                    return Json(errorMessage, JsonRequestBehavior.AllowGet);
+                }
+                else {
+                    var fromAddress = new MailAddress("test.sweepstakesannouncer@gmail.com", "Sweepstakes Announcer");
+                    var toAddress = new MailAddress($"{currentContact.EmailAddress}", $"{currentContact.FirstName} {currentContact.LastName}");
+                    string password = "TacoCat24$$";
+                    string subject = email.Subject;
+                    string body = email.Message.Replace(",", " ");
+
+                    var smtp = new SmtpClient
+                    {
+                        Host = "smtp.gmail.com",
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential("test.sweepstakesannouncer", password)
+                    };
+
+                    using (var message = new MailMessage(fromAddress, toAddress))
+                    {
+                        string Subject = subject;
+                        string Body = body;
+                    }
+                    {
+                        smtp.Send(fromAddress.Address, toAddress.Address, subject, body);
+                    }
+                    var successMessage = "Your email has been sent.";
+                    return Json(successMessage, JsonRequestBehavior.AllowGet);
+                }
             }
         }
 

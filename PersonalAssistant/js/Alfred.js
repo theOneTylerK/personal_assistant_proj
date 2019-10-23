@@ -1,5 +1,4 @@
-﻿
-var currentYear = "2019";
+﻿var currentYear = "2019";
 var rows = document.getElementById("my-table").getElementsByTagName("tr").length;
 var min = 0;
 var max = 4;
@@ -60,72 +59,72 @@ function alfredTalk(userInput) {
         saySomething("These local events look interesting")
         GetLocalEvents();
     }
-    else if ((userInput.includes("show") || userInput.includes("see")) && (userInput.includes("schedule") || userInput.includes("calendar")) && ((!userInput.includes("january") && !userInput.includes("January")) && (!userInput.includes("february") && !userInput.includes("February")) && (!userInput.includes("march") && !userInput.includes("March")) && (!userInput.includes("april") && !userInput.includes("April")) && (!userInput.includes("may") && !userInput.includes("May")) && (!userInput.includes("june") && !userInput.includes("June")) && (!userInput.includes("july") && !userInput.includes("July")) && (!userInput.includes("august") && !userInput.includes("August")) && (!userInput.includes("september") && !userInput.includes("September")) && (!userInput.includes("october") && !userInput.includes("October")) && (!userInput.includes("november") && !userInput.includes("November")) && (!userInput.includes("december") && !userInput.includes("December")))) {
+    else if ((userInput.includes("show") || userInput.includes("see") || userInput.includes("tell")) && (userInput.includes("schedule") || userInput.includes("calendar")) && ((!userInput.includes("january") && !userInput.includes("January")) && (!userInput.includes("february") && !userInput.includes("February")) && (!userInput.includes("march") && !userInput.includes("March")) && (!userInput.includes("april") && !userInput.includes("April")) && (!userInput.includes("may") && !userInput.includes("May")) && (!userInput.includes("june") && !userInput.includes("June")) && (!userInput.includes("july") && !userInput.includes("July")) && (!userInput.includes("august") && !userInput.includes("August")) && (!userInput.includes("september") && !userInput.includes("September")) && (!userInput.includes("october") && !userInput.includes("October")) && (!userInput.includes("november") && !userInput.includes("November")) && (!userInput.includes("december") && !userInput.includes("December")))) {
         document.getElementById("alfredResponse").innerHTML = "Of course! Here you go.";
         saySomething("Of course! Here you go.");
         showPlans();
     }
-    else if ((userInput.includes("show") || userInput.includes("see")) && (userInput.includes("schedule") || userInput.includes("calendar")) && (userInput.includes("january") || userInput.includes("January"))) {
+    else if ((userInput.includes("show") || userInput.includes("see") || userInput.includes("tell")) && (userInput.includes("schedule") || userInput.includes("calendar")) && (userInput.includes("january") || userInput.includes("January"))) {
         document.getElementById("alfredResponse").innerHTML = "No problem. Here are your plans for the month of January.";
         saySomething("No problem. Here are your plans for the month of January.");
         showJanuaryPlans();
     }
-    else if ((userInput.includes("show") || userInput.includes("see")) && (userInput.includes("schedule") || userInput.includes("calendar")) && (userInput.includes("february") || userInput.includes("February"))) {
+    else if ((userInput.includes("show") || userInput.includes("see") || userInput.includes("tell")) && (userInput.includes("schedule") || userInput.includes("calendar")) && (userInput.includes("february") || userInput.includes("February"))) {
         document.getElementById("alfredResponse").innerHTML = "No problem. Here are your plans for the month of February.";
         saySomething("No problem. Here are your plans for the month of February.");
         showFebruaryPlans();
     }
-    else if ((userInput.includes("show") || userInput.includes("see")) && (userInput.includes("schedule") || userInput.includes("calendar")) && (userInput.includes("march") || userInput.includes("March"))) {
+    else if ((userInput.includes("show") || userInput.includes("see") || userInput.includes("tell")) && (userInput.includes("schedule") || userInput.includes("calendar")) && (userInput.includes("march") || userInput.includes("March"))) {
         document.getElementById("alfredResponse").innerHTML = "No problem. Here are your plans for the month of March.";
         saySomething("No problem. Here are your plans for the month of March.");
         showMarchPlans();
     }
-    else if ((userInput.includes("show") || userInput.includes("see")) && (userInput.includes("schedule") || userInput.includes("calendar")) && (userInput.includes("april") || userInput.includes("April"))) {
+    else if ((userInput.includes("show") || userInput.includes("see") || userInput.includes("tell")) && (userInput.includes("schedule") || userInput.includes("calendar")) && (userInput.includes("april") || userInput.includes("April"))) {
         document.getElementById("alfredResponse").innerHTML = "No problem. Here are your plans for the month of April.";
         saySomething("No problem. Here are your plans for the month of April.");
         showAprilPlans();
     }
-    else if ((userInput.includes("show") || userInput.includes("see")) && (userInput.includes("schedule") || userInput.includes("calendar")) && (userInput.includes("may") || userInput.includes("May"))) {
+    else if ((userInput.includes("show") || userInput.includes("see") || userInput.includes("tell")) && (userInput.includes("schedule") || userInput.includes("calendar")) && (userInput.includes("may") || userInput.includes("May"))) {
         document.getElementById("alfredResponse").innerHTML = "No problem. Here are your plans for the month of May.";
         saySomething("No problem. Here are your plans for the month of May.");
         showMayPlans();
     }
-    else if ((userInput.includes("show") || userInput.includes("see")) && (userInput.includes("schedule") || userInput.includes("calendar")) && (userInput.includes("june") || userInput.includes("June"))) {
+    else if ((userInput.includes("show") || userInput.includes("see") || userInput.includes("tell")) && (userInput.includes("schedule") || userInput.includes("calendar")) && (userInput.includes("june") || userInput.includes("June"))) {
         document.getElementById("alfredResponse").innerHTML = "No problem. Here are your plans for the month of June.";
         saySomething("No problem. Here are your plans for the month of June.");
         showJunePlans();
     }
-    else if ((userInput.includes("show") || userInput.includes("see")) && (userInput.includes("schedule") || userInput.includes("calendar")) && (userInput.includes("july") || userInput.includes("July"))) {
+    else if ((userInput.includes("show") || userInput.includes("see") || userInput.includes("tell")) && (userInput.includes("schedule") || userInput.includes("calendar")) && (userInput.includes("july") || userInput.includes("July"))) {
         document.getElementById("alfredResponse").innerHTML = "No problem. Here are your plans for the month of July.";
         saySomething("No problem. Here are your plans for the month of July.");
         showJulyPlans();
     }
-    else if ((userInput.includes("show") || userInput.includes("see")) && (userInput.includes("schedule") || userInput.includes("calendar")) && (userInput.includes("august") || userInput.includes("August"))) {
+    else if ((userInput.includes("show") || userInput.includes("see") || userInput.includes("tell")) && (userInput.includes("schedule") || userInput.includes("calendar")) && (userInput.includes("august") || userInput.includes("August"))) {
         document.getElementById("alfredResponse").innerHTML = "No problem. Here are your plans for the month of August.";
         saySomething("No problem. Here are your plans for the month of August.");
         showAugustPlans();
     }
-    else if ((userInput.includes("show") || userInput.includes("see")) && (userInput.includes("schedule") || userInput.includes("calendar")) && (userInput.includes("september") || userInput.includes("September"))) {
+    else if ((userInput.includes("show") || userInput.includes("see") || userInput.includes("tell")) && (userInput.includes("schedule") || userInput.includes("calendar")) && (userInput.includes("september") || userInput.includes("September"))) {
         document.getElementById("alfredResponse").innerHTML = "No problem. Here are your plans for the month of September.";
         saySomething("No problem. Here are your plans for the month of September.");
         showSeptemberPlans();
     }
-    else if ((userInput.includes("show") || userInput.includes("see")) && (userInput.includes("schedule") || userInput.includes("calendar")) && (userInput.includes("october") || userInput.includes("October"))) {
+    else if ((userInput.includes("show") || userInput.includes("see") || userInput.includes("tell")) && (userInput.includes("schedule") || userInput.includes("calendar")) && (userInput.includes("october") || userInput.includes("October"))) {
         document.getElementById("alfredResponse").innerHTML = "No problem. Here are your plans for the month of October.";
         saySomething("No problem. Here are your plans for the month of October.");
         showOctoberPlans();
     }
-    else if ((userInput.includes("show") || userInput.includes("see")) && (userInput.includes("schedule") || userInput.includes("calendar")) && (userInput.includes("november") || userInput.includes("November"))) {
+    else if ((userInput.includes("show") || userInput.includes("see") || userInput.includes("tell")) && (userInput.includes("schedule") || userInput.includes("calendar")) && (userInput.includes("november") || userInput.includes("November"))) {
         document.getElementById("alfredResponse").innerHTML = "No problem. Here are your plans for the month of November.";
         saySomething("No problem. Here are your plans for the month of November.");
         showNovemberPlans();
     }
-    else if ((userInput.includes("show") || userInput.includes("see")) && (userInput.includes("schedule") || userInput.includes("calendar")) && (userInput.includes("december") || userInput.includes("December"))) {
+    else if ((userInput.includes("show") || userInput.includes("see") || userInput.includes("tell")) && (userInput.includes("schedule") || userInput.includes("calendar")) && (userInput.includes("december") || userInput.includes("December"))) {
         document.getElementById("alfredResponse").innerHTML = "No problem. Here are your plans for the month of December.";
         saySomething("No problem. Here are your plans for the month of December.");
         showDecemberPlans();
     }
-    else if ((userInput.includes("show") || userInput.includes("see")) && (userInput.includes("schedule") || userInput.includes("to do")) && (userInput.includes("today"))) {
+    else if ((userInput.includes("show") || userInput.includes("see") || userInput.includes("tell")) && (userInput.includes("schedule") || userInput.includes("to do")) && (userInput.includes("today"))) {
         document.getElementById("alfredResponse").innerHTML = "Sure. Just a moment";
         saySomething("Sure. Just a moment");
         showTodayPlans();
@@ -944,7 +943,8 @@ function DeletePlan(userInputArray) {
 function GetLocalEvents() {
 
     $.ajax({
-        url: 'https://www.eventbriteapi.com/v3/events/search/?token=3O5MC6XYKZ7MIDZ3SKBD&location.address=milwaukee&location.within=10km&expand=venue',
+        //url: 'https://www.eventbriteapi.com/v3/events/search/?token=3O5MC6XYKZ7MIDZ3SKBD&location.address=milwaukee&location.within=10km&expand=venue',
+        url: 'https://localhost:44318/Plans/GetLocalEvents',
         dataType: 'json',
         //contentType: 'application/json',
         type: 'get',
@@ -953,14 +953,13 @@ function GetLocalEvents() {
             document.getElementById("table-body").innerHTML = "";
             document.getElementById("events-body").innerHTML = "";
             console.log(data)
-            let events = data.events;
-            for (let el in events) {
+            for (let el in data) {
                 $("#events-table").append(
                     `<tr>
-                        <td>${events[el].name.text}</td>
-                        <td> ${events[el].description.text}</td>
-                        <td> ${events[el].venue.address.localized_address_display}</td>
-                        <td><a href = ${events[el].url}> ${events[el].url}</a></td>
+                        <td>${data[el].Name}</td>
+                        <td> ${data[el].Description}</td>
+                        <td> ${data[el].Location}</td>
+                        <td><a href = ${data[el].Url}> ${data[el].Url}</a></td>
                         </tr>`)
             }
         },
@@ -1019,16 +1018,27 @@ function SendEmail(userInputArray, userMessage) {
 
     $.ajax({
         url: 'https://localhost:44318/Contacts/sendEmail',
-        //dataType: 'json',
+        dataType: 'json',
         type: 'post',
         contentType: 'application/json',
         data: JSON.stringify(obj),
         success: function (data) {
+            console.log(data);
             document.getElementById("table-body").innerHTML = "";
             document.getElementById("events-body").innerHTML = "";
-            console.log(data);
-            saySomething("Your email has been sent to " + obj.FirstName)
-            document.getElementById("table-body").innerHTML = "Your email has been sent to " + obj.FirstName;
+            if (data == "I was unable to do that. Please be sure to include both a subject and a message when sending an email.") {
+                saySomething(data);
+                document.getElementById("alfredResponse").innerHTML = data;
+            }
+            else if (data == "I was unable to find a contact with that name.") {
+                saySomething(data);
+                document.getElementById("alfredResponse").innerHTML = data;
+            }
+            else {
+                saySomething("Your email has been sent to " + obj.FirstName)
+                document.getElementById("alfredResponse").innerHTML = "Your email has been sent to " + obj.FirstName;
+            }
+            
         },
         error: function (errorThrown) {
             console.log(errorThrown);
@@ -1058,4 +1068,3 @@ function SendEmail(userInputArray, userMessage) {
 //        }
 //    });
 //}
-
